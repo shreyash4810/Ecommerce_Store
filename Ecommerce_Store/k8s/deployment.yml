@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: ecommerce-store
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: ecommerce-store
+
+  template:
+    metadata:
+      labels:
+        app: ecommerce-store
+
+    spec:
+      containers:
+        - name: ecommerce-store
+          image: shreyashacr4810.azurecr.io/ecommerce-store:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            
