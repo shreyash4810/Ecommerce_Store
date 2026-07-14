@@ -1,0 +1,22 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- checkout: self
+
+- task: Maven@4
+  displayName: 'Build Java Application'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package -DskipTests'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+
+- script: |
+    ls -la
+    ls target
+  displayName: 'Verify Build Artifacts'
