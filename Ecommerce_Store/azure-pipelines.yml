@@ -2,21 +2,26 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-
-- checkout: self
-
+  name: java-agent
+  demands:
+    - Agent.Name -equals e-agent
+stages:
+- stage: Build
+  displayName: compile
+  jobs:
+    - job: compile
+      steps:
+        - 
 - task: Maven@4
-  displayName: 'Build Java Application'
   inputs:
+    azureSubscription: 'Aks-ecommerce'
     mavenPomFile: 'pom.xml'
-    goals: 'clean package -DskipTests'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 
-- script: |
-    ls -la
-    ls target
-  displayName: 'Verify Build Artifacts'
+ 
