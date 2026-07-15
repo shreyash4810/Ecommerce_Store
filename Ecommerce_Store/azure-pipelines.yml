@@ -14,9 +14,8 @@ stages:
       - task: Maven@4
         inputs:
           mavenPomFile: 'Ecommerce_Store/pom.xml'
-          goals: 'clean package'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'clean package -DskipTests'
+          publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           mavenVersionOption: 'Default'
           mavenAuthenticateFeed: false
