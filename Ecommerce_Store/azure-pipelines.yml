@@ -66,5 +66,5 @@ stages:
           containerRegistry: 'acr-terraform'
           repository: 'ecommerce-store'
           command: 'buildAndPush'
-          Dockerfile: '$(Build.SourcesDirectory)/dockerfile'
-          buildContext: '$(Build.SourcesDirectory)'
+          Dockerfile: '$(Build.SourcesDirectory)/Ecommerce_Store/dockerfile'
+          buildContext: '$(Build.SourcesDirectory)/Ecommerce_Store'
