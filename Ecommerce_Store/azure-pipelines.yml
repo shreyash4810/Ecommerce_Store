@@ -14,7 +14,7 @@ stages:
       -  task: Maven@4
          inputs:
            azureSubscription: 'Aks-ecommerce'
-           mavenPomFile: 'pom.xml'
+           mavenPomFile: 'Ecommerce_Store/pom.xml'
            publishJUnitResults: true
            testResultsFiles: '**/surefire-reports/TEST-*.xml'
            javaHomeOption: 'JDKVersion'
