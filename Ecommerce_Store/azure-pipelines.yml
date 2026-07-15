@@ -54,9 +54,7 @@ stages:
            ls -R
            find . -name Dockerfile 
         displayName: 'Find Dockerfile'
-      - task: CmdLine@2
-        inputs:
-          script: 'mvn package'
+    
 
       - task: Docker@2
         inputs:
