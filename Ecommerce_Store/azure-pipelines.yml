@@ -21,7 +21,13 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
- 
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish WAR Artifact'
+        inputs:
+          PathtoPublish: 'Ecommerce_Store/target'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
+
 - stage: test
   displayName: test 
 
@@ -49,17 +55,17 @@ stages:
     displayName: Build and Push
 
     steps:
+      - task: DownloadBuildArtifacts@1
+        displayName: 'Download Build Artifact'
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(Build.SourcesDirectory)/Ecommerce_Store'
       - script: |
-          echo "Current Directory:"
-          pwd
-          
-          echo "Repository Structure:"
-          ls -R
-
-          echo "WAR files:"
-          find . -name "*.war"
-        displayName: 'Debug Repository'
-    
+          echo "Downloaded files:"
+          ls -R $(Build.SourcesDirectory)/Ecommerce_Store
+        displayName: 'Verify Artifact'
 
       - task: Docker@2
         inputs:
@@ -68,3 +74,5 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '$(Build.SourcesDirectory)/Ecommerce_Store/dockerfile'
           buildContext: '$(Build.SourcesDirectory)/Ecommerce_Store'
+          tags: |
+            latest
