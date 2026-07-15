@@ -39,5 +39,29 @@ stages:
            mavenAuthenticateFeed: false
            effectivePomSkip: false
            sonarQubeRunAnalysis: false
-       
+
+
+- stage: 
+  displayName: docker
+
+  jobs:
+  - job: BuildAndPush
+    displayName: Build and Push
+
+    steps:
+      - script: |
+           pwd
+           ls -R
+           find . -name Dockerfile 
+        displayName: 'Find Dockerfile'
+      - task: CmdLine@2
+        inputs:
+          script: 'mvn package'
+
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'acr-terraform'
+          repository: 'ecommerce-store'
+          command: 'buildAndPush'
+          Dockerfile: 'dockerfile'
        
