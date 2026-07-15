@@ -50,10 +50,15 @@ stages:
 
     steps:
       - script: |
-           pwd
-           ls -R
-           find . -name Dockerfile 
-        displayName: 'Find Dockerfile'
+          echo "Current Directory:"
+          pwd
+          
+          echo "Repository Structure:"
+          ls -R
+
+          echo "WAR files:"
+          find . -name "*.war"
+        displayName: 'Debug Repository'
     
 
       - task: Docker@2
@@ -61,5 +66,5 @@ stages:
           containerRegistry: 'acr-terraform'
           repository: 'ecommerce-store'
           command: 'buildAndPush'
-          Dockerfile: 'Ecommerce_Store/dockerfile'
-          buildContext: 'Ecommerce_Store'
+          Dockerfile: '$(Build.SourcesDirectory)/dockerfile'
+          buildContext: '$(Build.SourcesDirectory)'
