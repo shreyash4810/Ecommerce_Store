@@ -11,17 +11,16 @@ stages:
   jobs:
     - job: compile
       steps:
-        - 
-- task: Maven@4
-  inputs:
-    azureSubscription: 'Aks-ecommerce'
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+      -  task: Maven@4
+         inputs:
+           azureSubscription: 'Aks-ecommerce'
+           mavenPomFile: 'pom.xml'
+           publishJUnitResults: true
+           testResultsFiles: '**/surefire-reports/TEST-*.xml'
+           javaHomeOption: 'JDKVersion'
+           mavenVersionOption: 'Default'
+           mavenAuthenticateFeed: false
+           effectivePomSkip: false
+           sonarQubeRunAnalysis: false
 
  
