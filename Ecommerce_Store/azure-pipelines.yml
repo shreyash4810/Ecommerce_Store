@@ -22,3 +22,22 @@ stages:
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
  
+- stage: test
+  displayName: test 
+
+  jobs:
+   - job: test
+     steps:
+       - task: Maven@4
+         inputs:
+           azureSubscription: 'Aks-ecommerce'
+           mavenPomFile: 'Ecommerce_Store/pom.xml'
+           goals: 'test'
+           publishJUnitResults: false
+           javaHomeOption: 'JDKVersion'
+           mavenVersionOption: 'Default'
+           mavenAuthenticateFeed: false
+           effectivePomSkip: false
+           sonarQubeRunAnalysis: false
+       
+       
