@@ -61,5 +61,4 @@ stages:
           containerRegistry: 'acr-terraform'
           repository: 'ecommerce-store'
           command: 'buildAndPush'
-          Dockerfile: 'dockerfile'
-       
+          Dockerfile: 'Ecommerce_Store/dockerfile'
